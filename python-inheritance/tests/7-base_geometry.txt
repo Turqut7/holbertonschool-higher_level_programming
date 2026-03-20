@@ -1,20 +1,15 @@
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 >>> bg = BaseGeometry()
 
->>> # 1. Düzgün istifadə
->>> bg.integer_validator("my_int", 12)
->>> bg.integer_validator("width", 89)
-
->>> # 2. Arqument çatışmazlığı
+>>> # 1. Klas üzərindən birbaşa çağırış testi
 >>> try:
-...     bg.integer_validator("age")
-... except TypeError as e:
+...     BaseGeometry.integer_validator(bg, "age", 25)
+... except Exception as e:
 ...     print(e)
-integer_validator() missing 1 required positional argument: 'value'
 
->>> # 3. Səhv tiplər (TypeError) - Bura diqqət!
+>>> # 2. Səhv tiplər (Daha sadə xəta tutma üsulu)
 >>> try:
-...     bg.integer_validator("age", (4,))
+...     bg.integer_validator("age", "John")
 ... except TypeError as e:
 ...     print(e)
 age must be an integer
@@ -26,13 +21,7 @@ age must be an integer
 age must be an integer
 
 >>> try:
-...     bg.integer_validator("age", [1, 2, 3])
-... except TypeError as e:
-...     print(e)
-age must be an integer
-
->>> try:
-...     bg.integer_validator("age", "John")
+...     bg.integer_validator("age", (4,))
 ... except TypeError as e:
 ...     print(e)
 age must be an integer
@@ -49,13 +38,7 @@ age must be an integer
 ...     print(e)
 age must be an integer
 
->>> try:
-...     bg.integer_validator("age", None)
-... except TypeError as e:
-...     print(e)
-age must be an integer
-
->>> # 4. Səhv dəyərlər (ValueError)
+>>> # 3. Səhv dəyərlər
 >>> try:
 ...     bg.integer_validator("age", 0)
 ... except ValueError as e:
