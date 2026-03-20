@@ -1,33 +1,40 @@
 #!/usr/bin/python3
-"""
-Bu modul matrisin bütün elementlərini bölən funksiyanı ehtiva edir.
-"""
+"""Matrix division module."""
 
 
 def matrix_divided(matrix, div):
-    """
-    Matrisin bütün elementlərini div-ə bölür.
-    Nəticə yeni bir matris olaraq qaytarılır (yuvarlaqlaşdırılmış).
-    """
-    msg = "matrix must be a matrix (list of lists) of integers/floats"
-    if not isinstance(matrix, list) or len(matrix) == 0:
-        raise TypeError(msg)
+    """Divide all elements of a matrix.
 
-    row_len = None
-    for row in matrix:
-        if not isinstance(row, list) or len(row) == 0:
-            raise TypeError(msg)
-        if row_len is None:
-            row_len = len(row)
-        elif len(row) != row_len:
-            raise TypeError("Each row of the matrix must have the same size")
-        for elem in row:
-            if not isinstance(elem, (int, float)):
-                raise TypeError(msg)
+    Args:
+        matrix (list): list of lists of integers/floats
+        div (int/float): divisor
 
+    Returns:
+        list: new matrix with divided values rounded to 2 decimals
+
+    Raises:
+        TypeError: if matrix is invalid or div is not a number
+        ZeroDivisionError: if div is zero
+    """
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
+
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    return [[round(elem / div, 2) for elem in row] for row in matrix]
+    if matrix == [[]]:
+        return [[]]
+
+    if (not isinstance(matrix, list) or len(matrix) == 0 or
+            not all(isinstance(row, list) for row in matrix) or
+            not all(all(isinstance(item, (int, float)) for item in row)
+                    for row in matrix)):
+        raise TypeError(
+            "matrix must be a matrix (list of lists) of integers/floats"
+        )
+
+    row_size = len(matrix[0])
+    if not all(len(row) == row_size for row in matrix):
+        raise TypeError("Each row of the matrix must have the same size")
+
+    return [list(map(lambda x: round(x / div, 2), row)) for row in matrix]
