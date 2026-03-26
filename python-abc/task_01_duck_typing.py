@@ -1,9 +1,16 @@
 #!/usr/bin/python3
-from abc import ABCMeta, abstractmethod
-import math
+'''
+01_duck_typing module
+'''
+
+from abc import ABC, abstractmethod
+from math import pi
 
 
-class Shape(metaclass=ABCMeta):
+class Shape(ABC):
+    '''
+    abstract class Shape
+    '''
     @abstractmethod
     def area(self):
         pass
@@ -14,28 +21,35 @@ class Shape(metaclass=ABCMeta):
 
 
 class Circle(Shape):
+    '''
+    Circle class inherits from shape
+    '''
     def __init__(self, radius):
         self.radius = radius
 
     def area(self):
-        return math.pi * self.radius ** 2
+        return self.radius ** 2 * pi
 
     def perimeter(self):
-        return 2 * math.pi * self.radius
+        return 2 * pi * abs(self.radius)
 
 
 class Rectangle(Shape):
+    '''
+    Rectangle class that inherits from Shape
+    '''
     def __init__(self, width, height):
         self.width = width
         self.height = height
 
     def area(self):
-        return self.width * self.height
+        return self.height * self.width
 
     def perimeter(self):
         return 2 * (self.width + self.height)
 
 
-def shape_info(shape):
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
+def shape_info(obj):
+    area = obj.area()
+    perimeter = obj.perimeter()
+    print(f"Area: {area}\nPerimeter: {perimeter}")
