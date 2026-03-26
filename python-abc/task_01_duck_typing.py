@@ -5,53 +5,53 @@ import math
 
 
 class Shape(ABC):
-    """Abstract class for shapes."""
+    """Abstract class Shape."""
 
     @abstractmethod
     def area(self):
-        """Abstract method for area."""
+        """Abstract method area."""
         pass
 
     @abstractmethod
     def perimeter(self):
-        """Abstract method for perimeter."""
+        """Abstract method perimeter."""
         pass
 
 
 class Circle(Shape):
-    """Circle class inheriting from Shape."""
+    """Circle class."""
 
     def __init__(self, radius):
-        """Initialize Circle with radius."""
+        """Init circle."""
         self.radius = radius
 
     def area(self):
-        """Calculate and return area of circle."""
+        """Circle area."""
         return math.pi * (self.radius ** 2)
 
     def perimeter(self):
-        """Calculate and return perimeter of circle."""
+        """Circle perimeter."""
         return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
-    """Rectangle class inheriting from Shape."""
+    """Rectangle class."""
 
     def __init__(self, width, height):
-        """Initialize Rectangle with width and height."""
+        """Init rectangle."""
         self.width = width
         self.height = height
 
     def area(self):
-        """Calculate and return area of rectangle."""
+        """Rectangle area."""
         return self.width * self.height
 
     def perimeter(self):
-        """Calculate and return perimeter of rectangle."""
+        """Rectangle perimeter."""
         return 2 * (self.width + self.height)
 
 
 def shape_info(shape):
-    """Print area and perimeter using duck typing."""
+    """Duck typing shape_info."""
     print("Area: {}".format(shape.area()))
     print("Perimeter: {}".format(shape.perimeter()))
