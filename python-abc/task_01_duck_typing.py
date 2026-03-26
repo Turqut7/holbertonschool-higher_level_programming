@@ -10,13 +10,11 @@ class Shape(ABC):
 
     @abstractmethod
     def area(self):
-        """Calculate area."""
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def perimeter(self):
-        """Calculate perimeter."""
-        pass
+        raise NotImplementedError()
 
 
 class Circle(Shape):
@@ -48,5 +46,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Function using duck typing."""
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
