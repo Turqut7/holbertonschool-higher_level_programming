@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Module that defines shapes using abstract base classes."""
 
-
 from abc import ABC, abstractmethod
 import math
 
