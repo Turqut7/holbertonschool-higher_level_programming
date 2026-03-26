@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 import math
 
 
-class Shape(ABC):
+class Shape(metaclass=ABCMeta):
     @abstractmethod
     def area(self):
         pass
@@ -18,7 +18,7 @@ class Circle(Shape):
         self.radius = radius
 
     def area(self):
-        return math.pi * (self.radius ** 2)
+        return math.pi * self.radius ** 2
 
     def perimeter(self):
         return 2 * math.pi * self.radius
@@ -37,5 +37,5 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    print("Area: {}".format(shape.area()))
-    print("Perimeter: {}".format(shape.perimeter()))
+    print("Area:", shape.area())
+    print("Perimeter:", shape.perimeter())
